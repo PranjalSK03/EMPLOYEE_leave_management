@@ -25,7 +25,7 @@ function OnLeave(){
                 if(response.data.deptOnLeave.length === 0){
                     setIsDeptEmpty(true);
                 }
-                if(response.data.deptOnLeave.length === 0){
+                if(response.data.onLeave.length === 0){
                     setIsEmpty(true);
                 }
             }
@@ -41,37 +41,43 @@ function OnLeave(){
     },[])
 
     return(
-        <div className="mx-8 my-8 inline-block ">
+        <div className="mx-8 my-8 inline-block w-1/2">
             {choice === 2 &&
-            <div className=''>
-                 <button className={`${!deptShow ? "bg-blue-900" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4`} onClick={ () => setDeptShow(!deptShow)}>Everyone</button>
-                 <button className={`${deptShow ? "bg-blue-900" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4`} onClick={ () => setDeptShow(!deptShow)}>Department</button>
-            </div> 
+                <div className=''>
+                    <button className={`${!deptShow ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 transition ease-out delay-75 duration-600`} onClick={ () => setDeptShow(!deptShow)}>Everyone</button>
+                    <button className={`${deptShow ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 mb-8 transition ease-out delay-75 duration-600`} onClick={ () => setDeptShow(!deptShow)}>Department</button>
+                </div> 
            }
             {choice === 2 && !deptShow && leaveData.map((people, index)=>(
                 <div>
                     {isEmpty && <h1 className='text-5xl font-bold px-60 py-10  border-2 border-blue-800 p-10 rounded-2xl'>Looks like No Ones On Leave !!</h1>}
-                    {!isEmpty && <div className="bg-gradient-to-r from-blue-500 to-blue-400 px-2 rounded-3xl py-5 my-5 transition duration-300 hover:shadow-[0_1px_20px_10px_rgba(0,0,80,0.5)] hover:translate-x-2">
-                        <h1 className="text-white mx-3 my-3 bg-blue-900 p-4 rounded-3xl text-center flex justify-center">
-                            <p>Employee ID: {people.empID}</p>
-                            <BsFillArrowDownCircleFill className={`text-white text-xl mb-1 mx-5 ${idx === index && "rotate-180"} `} 
-                            onClick={()=> {
-                                if(index === idx)
-                                    setIdx(-1);
-                                else
-                                    setIdx(index)}
-                            }/>
-                        </h1>
-                        <div className={`m-3 rounded-2xl p-5 text-white bg-blue-700 duration-700 delay-500 flex justify-evenly`}>
-                            <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en_IN")}</h1>
-                            <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en_IN")}</h1>  
-                        </div>
-                        <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
-                        <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Department: {people.department}</h1>
-                    </div>}
+                    {!isEmpty && 
+                        <div className="bg-gradient-to-r from-blue-500 to-blue-400 px-2 rounded-3xl py-5 my-5 transition duration-300 hover:shadow-[0_1px_20px_10px_rgba(0,0,80,0.5)] hover:translate-x-2">
+                            <h1 className="text-white mx-3 my-3 bg-blue-900 p-4 rounded-3xl text-center flex justify-center">
+                                <p>Employee ID: {people.empID}</p>
+                                <BsFillArrowDownCircleFill className={`text-white text-xl mb-1 mx-5 ${idx === index && "rotate-180"} `} 
+                                onClick={()=> {
+                                    if(index === idx)
+                                        setIdx(-1);
+                                    else
+                                        setIdx(index)}
+                                }/>
+                            </h1>
+                            <div className={`m-3 rounded-2xl p-5 text-white bg-blue-700 duration-700 delay-500 flex justify-evenly`}>
+                                <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en-IN")}</h1>
+                                <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en-IN")}</h1>  
+                            </div>
+                            <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
+                            <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Department: {people.department}</h1>
+                        </div>}
                 </div>
                 
             ))}
+            {choice === 2 && !deptShow && leaveData.length === 0 &&
+                <div className='my-10 rounded-2xl border-2 border-blue-800 py-12 px-8 text-center'>
+                    <h1 className='text-5xl font-bold'>Company is quite active, No one is on Leave</h1>
+                </div>
+            }
             {choice === 2 && deptShow && deptLeaveData.map((people, index)=>(
                 <div>
                     {isDeptEmpty && <h1 className='text-5xl font-bold px-60 py-10  border-2 border-blue-800 p-10 rounded-2xl'>Looks like No Ones On Leave !!</h1>}
@@ -95,6 +101,11 @@ function OnLeave(){
                 </div>
                 
             ))}
+            {choice === 2 && deptShow && deptLeaveData.length === 0 &&
+                <div className='my-10 rounded-2xl border-2 border-blue-800 py-12 px-8 text-center'>
+                    <h1 className='text-5xl font-bold'>Your Department is quite active, no one is on leave</h1>
+                </div>
+            }
             {choice === 1 && deptLeaveData.map((people, index)=>(
                 <div>
                     {isDeptEmpty && <h1 className='text-5xl font-bold px-60 py-10  border-2 border-blue-800 p-10 rounded-2xl'>Looks like No Ones On Leave !!</h1>}

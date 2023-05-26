@@ -78,14 +78,28 @@ function ViewApp(){
                             <h1 className='text-2xl mt-2 ml-6'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'> {new Date(application.leaveEnds).toLocaleDateString("en-IN")}</h1>  
                         </div>
                         <div className={`m-3 rounded-3xl p-5 bg-blue-400 text-white text-left ${(index !== dropDownIndex) && "hidden"} duration-700 delay-500`}>
-                            <h1>Applicant ID: {application.employeeId}</h1>
-                            <h1>Leave Title: {application.applicationHeader}</h1>
-                            <h1>Application: {application.applicationBody}</h1>
-                            <h1>Applied on: {new Date(application.timestampApplication).toLocaleDateString("en-IN")}</h1>
+                            <table className='w-full border-separate border-spacing-2'>
+                                <tr>
+                                    <td className='text-center w-1/3 border-2 rounded-lg'>Applicant ID:</td>
+                                    <td className='bg-blue-700 px-6 py-2 rounded-full'>{application.employeeId}</td>
+                                </tr>
+                                <tr>
+                                    <td className='text-center w-1/3 border-2 rounded-lg'>Leave Title:</td>
+                                    <td className='bg-blue-700 px-6 py-2 rounded-full'>{application.applicationHeader}</td>
+                                </tr>
+                                <tr>
+                                    <td className='text-center w-1/3 border-2 rounded-lg'>Application:</td>
+                                    <td className='bg-blue-700 px-6 py-2 rounded-full'>{application.applicationBody}</td>
+                                </tr>
+                                <tr>
+                                    <td className='text-center w-1/3 border-2 rounded-lg'>Applied on:</td>
+                                    <td className='bg-blue-700 px-6 py-2 rounded-full'>{new Date(application.timestampApplication).toLocaleDateString("en-IN")}</td>
+                                </tr>
+                            </table>
                             <div className=''>
-                                <h1>Track your Application: </h1>
+                                <h1 className='text-center w-2/3 bg-blue-600 py-3 rounded-full mx-auto mt-6 mb-3'>Track your Application: </h1>
                                 {application.timestampForward?.map((timeStamp , idx) => (
-                                    <div className='flex gap-6 mx-8'>
+                                    <div className='flex gap-6 mx-20 my-2'>
                                         <h1>{new Date(timeStamp).toLocaleString("en-IN")}</h1>
                                         <h1>{application.Remarks[idx]}</h1>
                                     </div>

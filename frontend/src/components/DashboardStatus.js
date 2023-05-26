@@ -57,7 +57,7 @@ function Status({select, onChange}){
             <form className='w-full ml-auto mr-4 pl-6 flex space-x-9'>
                 <div className={`w-full flex items-center rounded-full bg-sky-100 my-8 px-4 py-2 bg-opacity-50`}>
                     <BsSearch className={` text-white text-lg block float-left cursor-pointer`}/>
-                    <input type={"search"} placeholder='Application ID' name='search' autoComplete='on'
+                    <input type={"search"} placeholder='Application ID' name='search' autoComplete='off'
                     onChange = { (e) => setQuery(e.target.value)}
                     className={`w-full text-base-lg text-gray-800 font-semibold placeholder-blue-500 bg-transparent focus:outline-none focus:caret-white pl-6 pr-4 py-2`}
                     />

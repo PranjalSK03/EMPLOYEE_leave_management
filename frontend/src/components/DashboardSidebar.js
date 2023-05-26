@@ -41,7 +41,7 @@ function Sidebar({selected, onChange, option, length}){
             {title: "Previous Leaves", icon: <BsFillCalendarCheckFill/>},
             {title: "Applications", icon: <IoDocumentText/>},
             {title: "On Leave", icon: <GiPalmTree/>},
-            {title: "List of Employees", icon: <IoPeopleSharp/>}
+            {title: "Department Employees", icon: <IoPeopleSharp/>}
         ];
     }
     else if(option === 3){
@@ -49,7 +49,7 @@ function Sidebar({selected, onChange, option, length}){
             {title: "Profile", icon: <HiUser/>},
             {title: "Applications", icon: <IoDocumentText/>},
             {title: "On Leave", icon: <GiPalmTree/>},
-            {title: "List of Employees", icon: <IoPeopleSharp/>}
+            {title: "Employees", icon: <IoPeopleSharp/>}
         ];
     }
     else if(option === 4){
@@ -111,7 +111,7 @@ function Sidebar({selected, onChange, option, length}){
             {/* <AiFillEnvironment className={`bg-amber-300 text-4xl rounded cursor-pointer block float-left mr-4 duration-300 ${!open && "rotate-[360deg]"}`}/> */}
                 <NavLink to = "/" className={`text-white font-medium text-4xl origin-left ${!open && "scale-0"}`}>Aphelion</NavLink>
             </div>
-            <form className={`mt-6 flex ${!open && "hidden"} gap-2`}>
+            {!isEntry && <form className={`mt-6 flex ${!open && "hidden"} gap-2`}>
                 <div className={`flex items-center rounded-xl bg-sky-100 bg-opacity-25 px-3`}>
                     <BsSearch className={` text-white text-lg block float-left cursor-pointer mr-4`}/>
                     <input type={"search"} placeholder='Employee ID' name='query' autoComplete='on'
@@ -128,10 +128,12 @@ function Sidebar({selected, onChange, option, length}){
                     className={` text-blue-300 rounded-xl px-6 py-2 bg-transparent border-2 border-blue-300 hover:shadow-[0_0px_10px_5px_rgba(255,255,255,0.2)] hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-blue-300 hover:text-blue-900 hover:font-semibold`}>
                         Go
                 </button>
+                
             </form>
+            }
 
             { isEntry && empDetails &&
-                <div className={`rounded-2xl bg-sky-100 bg-opacity-25 p-3 mt-4 ${!open ? "hidden" : ""}`} >
+                <div className={` backdrop-blur-xl mt-6 shadow-[0_0px_10px_5px_rgba(255,255,255,0.6)] rounded-2xl bg-sky-100 bg-opacity-25 p-3 ${!open ? "hidden" : ""}`} >
                     <GrFormClose className='ml-auto text-white bg-white rounded-full mb-2' 
                     onClick={() =>{
                         setIsEntry(false);
@@ -144,6 +146,8 @@ function Sidebar({selected, onChange, option, length}){
                     </div>
                 </div>
             }
+
+            
 
             { isEntry && empDetails === null &&
                 <div className={`rounded-2xl bg-sky-100 bg-opacity-25 p-3 mt-4 ${!open ? "hidden" : ""} `} >
@@ -158,7 +162,7 @@ function Sidebar({selected, onChange, option, length}){
                 </div>
             }
             
-            <ul className={`pt-8 ${!open ? "mt-16" : isEntry ? "" : "mt-2" }`}>
+            <ul className={`pt-4 ${!open ? "mt-16" : isEntry ? "mt-0" : "mt-2" }`}>
                 {Menu.map((menu, index) => (
                     <>
                         <li key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 rounded-md cursor-pointer p-2 hover:bg-sky-100 hover:bg-opacity-25 transition ease-in mt-4
@@ -185,9 +189,9 @@ function Sidebar({selected, onChange, option, length}){
                         </li>
                     </>
                 ))}
-                <li className="text-gray-300 text-sm flex items-center gap-x-4 rounded-md cursor-pointer p-2 hover:bg-sky-100 hover:bg-opacity-25 transition ease-in mt-20" 
+                <li className={`text-gray-300 text-sm flex items-center gap-x-4 rounded-md cursor-pointer p-2 hover:bg-sky-100 hover:bg-opacity-25 transition ease-in ${isEntry ? "mt-2" : "mt-20"}`}
                     onClick = {(e) => processLogout(e)}>
-                    <span className="text-2xl float-left block">
+                    <span className="text-2xl float-left block text-red-500">
                         {<TbLogout/>}
                     </span>
                     <span className={`text-base font-medium flex-1 duration-150  ${!open && "hidden"} `}>Logout</span>

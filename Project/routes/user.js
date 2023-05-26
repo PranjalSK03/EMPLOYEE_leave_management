@@ -11,6 +11,7 @@ const Flow = require("../models/flow_model.js");
 const OnLeave = require("../models/onleave_model.js");
 const Credentials = require("../models/employee_cred_model.js");
 const Designation = require("../models/designation_model.js");
+const Departments = require("../models/department_model.js");
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
                        
 var Position = ["Technical Staff", "HR Staff", "Asst. Head Technical", "Head Technical", "Asst. Head HR", "Head HR", "CEO"];
+var Department = ["Technical", "HR", "CEO"];
 
 
 //GET
@@ -287,11 +289,20 @@ router.get("/previouLeavesApplication", authenticateToken, async (req,res)=>{
 router.get("/allemployee", authenticateToken, async(req, res)=>{
     try{
         const employees = await Employee.find({});
+        // const department = await Department.find({});
+
+        const deptArr = [];
+
+        for(let i=0; i<Department.length; i++){
+            if(Department[i]!= 'CEO')
+            deptArr.push(Department[i]);
+        }
 
         return res.status(200).send({
             success: true,
             msg: "here is the employee details",
-            employees
+            employees,
+            deptArr
         })
     }
     catch(err){
@@ -319,6 +330,36 @@ router.get("/deptallemployee/:dept", authenticateToken, async (req, res)=>{
         })
     }
 })
+
+router.get("/ceoprofile", authenticateToken, async (req, res)=>{
+
+    try{
+        const Employees = await Employee.find({})
+        const Onleave = await OnLeave.distinct('empID');
+        console.log(Onleave);
+
+
+        const empLength = Employees.length - 1 ;
+        const leaveLength = Onleave.length;
+
+        console.log(leaveLength);
+
+
+        return res.status(200).send({
+            success: true,
+            msg: "the data for CEO profile",
+            empLength,
+            leaveLength
+        })
+    }
+    catch(err){
+        return res.status(500).send({
+            success: false,
+            msg: "server error !!"
+        })
+    }
+})
+
 
 
 
@@ -621,6 +662,40 @@ router.post("/employeedetails", authenticateToken, async (req, res)=>{
     }
 })
 
+router.post("/removeemployee", async(req, res)=>{
+
+    console.log(req.body.id);
+
+    try{
+        const removedEmployee = await Employee.deleteOne({empID: req.body.id});
+        const removedEmployeeCred = await Credentials.deleteOne({empID: req.body.id});
+    
+        console.log(removedEmployee);
+        console.log(removedEmployeeCred);
+    
+        if(removedEmployee.deletedCount >=1 && removedEmployeeCred.deletedCount >=1){
+            res.status(200).send({
+                success: true,
+                msg: "successfully removed!!"
+            })
+        }
+        else{
+            res.status(200).send({
+                success: false,
+                msg: "some error!!"
+            }) 
+        }
+    }
+    catch(err){
+        return res.status(500).send({
+            success: false,
+            msg: "server error !!"
+        })
+    }
+
+
+})
+
 
 
 
@@ -643,6 +718,8 @@ function authenticateToken(req, res, next){
         next();
     });
 }
+
+
 
 
 module.exports = router;

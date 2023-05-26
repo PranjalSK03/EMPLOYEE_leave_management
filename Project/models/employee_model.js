@@ -36,11 +36,6 @@ const employeeSchema = new mongoose.Schema({
     isAdmin:{
         type: Boolean,
         default: true
-    },
-    verified:{
-        type: Boolean,
-        default: true,
-        required: true
     }
 });
 

@@ -11,11 +11,6 @@ const credentialSchema = new mongoose.Schema({
     Password:{
         type: String,
         required: [true, "Enter your password"],
-    },
-    verify:{
-        type: Boolean,
-        required: true,
-        default: true
     }
 });
 

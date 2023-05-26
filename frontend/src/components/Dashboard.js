@@ -27,19 +27,23 @@ function Dashboard(){
     const [select, setSelected] = useState(0);
     const [length, setLength] = useState(0);
     const [isCEO, setIsCEO] = useState(false);
-    const [employeeDept, setEmployeeDept] = useState(null)
+    const [employeeDept, setEmployeeDept] = useState(null);
+    const [empId, setEmpId] = useState(null);
 
     const getProfile = async() => {
         try{
             const response = await axios.get('/user',{withCredentials:true})
             console.log({response})
             if(response.data.success) {
+                setEmployeeDept(response.data.employee.empDept);
+                setEmpId(response.data.employee.empID);
                 setEmployee(response.data.employee)
                 setCount(response.data.applicationCount)
                 setOption(response.data.options);
                 setLength(response.data.lenAppToVerify);
                 setIsCEO(response.data.isCeo);
-                setEmployeeDept(response.data.employee.empDept)
+                
+                console.log(empId);
             }
             
         }
@@ -60,7 +64,7 @@ function Dashboard(){
     return(
         <div className='flex'>
            <Sidebar selected={select} onChange={setSelected} option={option} length = {length}/>
-            {select === 0  && employee  && (<Profile employee = {employee} count={count} />)}
+            {select === 0  && employee  && (<Profile employee = {employee} count={count} isCEO = {isCEO}/>)}
             {select === 1  && !isCEO && (<Apply />)}
             {select === 1  && isCEO && (<ViewApplication />)}
             {select === 2  && !isCEO && (<Status selected={select} onChange={setSelected}/>)}
@@ -69,7 +73,7 @@ function Dashboard(){
             {select === 3  && isCEO && (<Employees isCEO = {isCEO} employeeDept = {employeeDept}/>)}{/*Previous Leaves needs to be mentioned here*/}
             {select === 4  && (<ViewApplication />)}
             {select === 5  && (<OnLeave/>)}
-            {select === 6  && (<Employees isCEO = {isCEO} employeeDept = {employeeDept}/>)}
+            {select === 6  && (<Employees isCEO = {isCEO} employeeDept = {employeeDept} empId = {empId}/>)}
             
             
         </div>
