@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300,400,500,600,700,800&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    /*actaully 
+    width + padding + border = actual width of an element
+    height + padding + border = actual height of an element
+    but box-sizing:border-box makes it such that padding and border are included in the width and height*/
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-size: cover;
+    background-position: center
+}
+
+.navigation {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    padding: 0px 100px;
+    background-color: rgba(255, 255, 255, 0.3);
+    align-items: center;
+    z-index: 99;
+    /* border-bottom: 2px solid white; */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    /* backdrop-filter: blur(20px); */
+}
+
+@media (max-width:992px) {
+    .navbar-nav{
+        margin-top: 10px;
+        backdrop-filter: blur(20px);
+        padding-bottom: 20px;
+        border: 2px solid white;
+        border-radius: 30px;
+        width: 210px;
+    }
+    .navigation a:hover::after{
+        width: 100px;
+        transform: scaleX(0);
+    } 
+    .redirect{
+        margin-top: 20px;
+    }
+}
+
+.logo{
+    font-size: 2.3rem;
+    color: white;
+    line-height: 60px;
+    padding: 15px 20px;
+    font-weight: 600;
+    user-select: none; /*user cant select this thing*/
+}
+
+.navigation a{
+    position: relative;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 500;
+    margin-left: 35px;
+    margin-top: 10px;
+}
+
+.navigation a::after{ 
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+} 
+
+.navigation a:hover::after{
+
+    transform: scaleX(1);
+} 
+
+.navigation .redirect{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+    margin-left: 40px;
+    
+}
+
+.navigation .redirect:hover{
+    width: 130px;
+    height: 50px;
+    color: black;
+    background: white;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: 0.9s;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    transform: translate(2px, 2px);
+}
+
+.wrapper{
+    position: relative;
+    width: 390px;
+    height: 480px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.wrapper .form-box{
+    font-size: 1.3em;
+    color: white;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width:100%;
+    height: 50px;
+    border-bottom: 2px solid  white;
+    margin: 30px 0; 
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    transform: translateY(-50%);
+    color: rgba(255,255,255, 0.7);
+    font-weight: 200;
+    pointer-events: none;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -3px;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.8em;
+    color: rgba(255,255,255, 0.9);
+    font-weight: 500;
+    padding: 0 35px 0 2px;
+}
+
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1em;
+    color: rgba(255,255,255, 0.8);;
+    line-height: 60px;
+}
+
+.inner{
+    font-size: 0.95em;
+}
+
+.forgot{
+    font-size: 0.75em;
+    color: white;
+    font-weight: 500;
+    margin: -5px 0 15px;
+    display: flex;
+    justify-content: center;  
+}
+
+.forgot label input{
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.forgot a{
+    color: #97DEFF;
+    text-decoration: none;
+}
+
+.forgot a:hover{
+    color: white;
+    text-decoration: underline;
+}
+
+.btn{
+    width: 100%;
+    height:  45px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    border: none;
+    font-size: 0.9em;
+    margin-top: 7px;
+    font-weight: 500px;
+}
+.btn:hover{
+    width: 100%;
+    height:  45px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    border: none;
+    font-size: 0.9em;
+    margin-top: 7px;
+    font-weight: 500px;
+    box-shadow: 0 0 30px rgba(0,0,0,1);
+}
+
+.login-register{
+    margin-top: 4px;
+    font-size: 0.7em;
+    color: white;
+    margin: 25px 0 10px;
+    display: flex;
+}
+
+.login-register p{
+    margin-top: 3px;
+}
+
+.Link{
+    color: #97DEFF;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding-top: 0;
+    margin-left: 2px;
+}
+
+.Link:hover{
+    text-decoration: underline;
+    font-size: 1.2em;
+}
+
+.error{
+    color: red;
+    font-size: 0.8em;
+}
+

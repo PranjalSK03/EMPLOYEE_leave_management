@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset = "utf-8">
+      <title>Aphelion</title>
+      <link rel="" href="" >
+   </head>
+   <body>
+      <h1>Welcome: <%= id%></h1>
+      <hr>
+      <% if(appl.length!=0) { %>
+         <% for(let i=0; i<appl.length; i++) { %>
+            <p>title: <%= appl[i].applicationHeader%></p>
+            <p>body: <%= appl[i].applicationBody%></p>
+            <p><em>from:</em> <%= appl[i].leaveStarts%> ______  <em>to</em>:<%= appl[i].leaveEnds%></p>
+            <p>Status: <%= appl[i].applicationStatus%></p>
+            <p>with whom : <%= appl[i].locationOfAppl.levelName%></p>
+            <p>applied on: <%= appl[i].timestampApplication%></p>
+            <h3>Remarks : </h3>
+            <% for(let j=0; j<appl[i].Remarks.length; j++) { %>
+               <p><%=appl[i].Remarks[j]%> <b>at</b>
+                  <% if(appl[i].applicationStatus == "Pending") { %>
+                     <%= appl[i].timestampForward[j]%>
+                  <% } else { %>
+                     <% if(j < appl[i].Remarks.length - 1 ) { %>
+                        <%= appl[i].timestampForward[j]%>
+                     <% } else { %>
+                        <%= appl[i].timestampAccOrRej%>
+                     <% } %>
+                  <% } %>
+               </p>
+            <% } %>
+            <hr>
+         <% } %>
+      <% } else { %>
+         <p>You haven't applied yet</p>
+      <% } %>
+
+      <form method="post" action="/home/logout">
+         <button name="logout">Logout</button>
+     </form>
+   </body>
+</html>

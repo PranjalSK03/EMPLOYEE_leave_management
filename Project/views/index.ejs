@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset = "utf-8">
+      <title>Aphelion</title>
+      <link rel="stylesheet" href="css/index_styles.css" >
+   </head>
+   <body>
+        <section>
+            <h1>Aphelion</h1>
+            <form action="/home/login" method="get">
+                <button class="btn-login" id="redirect">Login</button>
+            </form>
+            <div class="wave" id="wave1" style="--i:1"></div>
+            <div class="wave" id="wave2" style="--i:2"></div>
+            <div class="wave" id="wave3" style="--i:3"></div>
+            <div class="wave" id="wave4" style="--i:4"></div>
+        </section>
+        <div class="sec">
+            <h2>About the Website</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quisquam vero
+            tempora nisi nulla impedit, aut laboriosam id! Distinctio voluptates, itaque
+            praesentium sequi libero veritatis non perferendis maxime magnam accusantium facere,
+            numquam quis quae maiores dolorem error vitae. Quasi minima atque laborum sit at corporis
+            ipsa maxime ducimus doloribus veniam perspiciatis corrupti accusantium numquam nesciunt dolorum eos,
+            pariatur enim? Et ipsam illum culpa laborum!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Repellendus, ducimus cumque! Maiores pariatur unde dicta quo quas praesentium enim, quia eos reiciendis
+            voluptate ex nobis modi facere veniam corrupti iste doloribus accusantium corporis ullam!
+            Atque pariatur temporibus illo reiciendis facilis, harum nulla enim delectus quo vero consequuntur,
+            perspiciatis quasi nam!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et incidunt inventore voluptatem 
+            neque debitis, quibusdam magnam ut numquam perspiciatis, laudantium expedita quisquam distinctio vitae 
+            iure modi corrupti veritatis, enim praesentium recusandae optio maiores a. Quod sequi odio distinctio
+            eos non labore maxime dignissimos! Placeat reiciendis sint modi nihil earum laborum sit dolorum quod.
+            Cum nobis nesciunt aspernatur ad voluptate maiores quam inventore accusamus dolorum. Obcaecati repellat
+            perspiciatis recusandae eaque suscipit voluptatem. Quasi veniam optio placeat possimus ipsa doloribus
+            vitae iusto.</p>
+        </div>
+
+        <script type="text/javascript">
+
+            let wave1 = document.getElementById('wave1');
+            let wave2 = document.getElementById('wave2');
+            let wave3 = document.getElementById('wave3');
+            let wave4 = document.getElementById('wave4');
+            
+            window.addEventListener('scroll', ()=>{
+                let value = window.scrollY;
+            
+                wave1.style.backgroundPositionX = 400 + value*4 + 'px';
+                wave2.style.backgroundPositionX = 300 + value*-4 + 'px';
+                wave3.style.backgroundPositionX = 200 + value*2 + 'px';
+                wave4.style.backgroundPositionX = 100 + value*-2 + 'px';
+            });
+        </script>
+   </body>
+</html>

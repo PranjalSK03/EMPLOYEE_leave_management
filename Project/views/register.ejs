@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset = "utf-8">
+      <title>Aphelion</title>
+      <link rel="" href="" >
+   </head>
+   <body>
+         <h1>REGISTER</h1>
+        <form action="/home/register" method="POST">
+            <div>
+               <label>ID:</label>
+               <input type="text" name="empId" required>
+            </div>
+            <div>
+               <label>Name</label>
+               <input type="text" name="empName" required>
+            </div>
+            <div>
+               <label>Department</label>
+               <select name="designation" required>
+                  <% for(let i=0; i<optionDepartment.length; i++) { %>
+                     <option value="<%=optionDepartment[i]%>"><%= optionDepartment[i]%></option>
+                  <% } %>
+               </select>
+            </div>
+            <div>
+               <label>designation</label>
+               <select name="designation" required>
+                  <% for(let i=0; i<optionDesignation.length; i++) { %>
+                     <option value="<%=optionDesignation[i]%>"><%= optionDesignation[i]%></option>
+                  <% } %>
+               </select>
+            </div>
+            <div>
+               <label>password</label>
+               <input type="text" name="password" required>
+            </div>
+            <div>
+               <button name="register">REGISTER</button>
+            </div>
+
+        </form>
+      
+   </body>
+</html>

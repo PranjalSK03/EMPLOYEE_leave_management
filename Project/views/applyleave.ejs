@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset = "utf-8">
+      <title>Aphelion</title>
+      <link rel="" href="" >
+   </head>
+   <body>
+        <h1>Welcome: <%= id %></h1>
+        <form action="/user/applyforleave" method="post">
+            <div>
+                <label>Reason for leave: </label>
+                <input name="appHeader" type="text">
+            </div>
+            <div>
+                <label>Application body: </label>
+                <input name="appBody" type="text">
+            </div>
+            <div>
+                <label>Leave Starts: </label>
+                <input name="startDate" type="Date">
+            </div>
+            <div>
+                <label>Leave Ends: </label>
+                <input name="endDate" type="Date">
+            </div>
+            
+            <button name="submit">SUBMIT</button>
+        </form>
+        <hr>
+        <form method="post" action="/home/logout">
+            <button name="logout">Logout</button>
+        </form>
+
+   </body>
+</html>

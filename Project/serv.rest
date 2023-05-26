@@ -1,0 +1,101 @@
+
+GET http://localhost:3000/admin/positions
+
+###
+
+GET http://localhost:3000/admin/flow
+
+###
+
+GET http://localhost:3000/home/register
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+
+###
+
+GET http://localhost:3000/home/login
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+
+###
+
+GET http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+
+###
+GET http://localhost:3000/user/application
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+
+
+###
+
+GET http://localhost:3000/user/applyforleave
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+
+
+###
+GET http://localhost:3000/user/judgeapplication
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkhSMDAzIiwiaWF0IjoxNjgyMDAzNzg4LCJleHAiOjE2ODIxNzY1ODh9.zNXHe7hubiBh9AJ-EKKxUcgkXvzxrZwyuW4pF1AbHys
+
+###
+
+POST http://localhost:3000/user/judgeapplication
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMDAzMjQ1LCJleHAiOjE2ODIxNzYwNDV9.0LXRwYyXOQoF14np5aMVaMf8WKWuoM6_8xr8c3USX4Q
+Content-Type: application/json
+
+{
+    "applId": "64421cd42b114da726c4b943",
+    "status" : "accept",
+    "remark":  "you have done great" 
+}
+
+###
+
+POST http://localhost:3000/user/applyforleave
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRDMDAxIiwiaWF0IjoxNjgyMTkxNjEwLCJleHAiOjE2ODIzNjQ0MTB9.TflmBc25vrPJT3cMrXRa5M0iCmPvRcGB5sI58ixO0fs
+Content-Type: application/json
+
+{
+    "appHeader": "hi hello applying leave",
+    "startDate": "1681926515221",
+    "endDate": "1681926515221",
+    "appBody": "lorem ipsum dolor ist pist sut may lorem hi bye"
+}
+###
+
+POST http://localhost:3000/home/login
+Content-Type: application/json
+
+{
+    "empId": "TC001",
+    "password": "r"  
+}
+
+###
+POST http://localhost:3000/home/register
+Content-Type: application/json
+
+{
+    "empId": "HR003",
+    "empName": "Ansh",
+    "empDept": "HR",
+    "designation": "HR Staff",
+    "password": "a"
+}
+
+###
+
+POST http://localhost:3000/admin/positions
+Content-Type: application/json
+
+{
+    "pos": "CEO"
+}
+
+###
+
+POST http://localhost:3000/admin/flow
+Content-Type: application/json
+
+{
+    "id": 1,
+    "array": [0,2,3,4]
+}
