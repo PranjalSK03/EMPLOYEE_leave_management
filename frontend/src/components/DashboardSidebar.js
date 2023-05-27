@@ -162,7 +162,7 @@ function Sidebar({selected, onChange, option, length}){
                 </div>
             }
             
-            <ul className={`pt-4 ${!open ? "mt-16" : isEntry ? "mt-0" : "mt-2" }`}>
+            <ul className={`pt-4 ${!open ? "mt-16" : isEntry ? "mt-0" : "mt-2"}`}>
                 {Menu.map((menu, index) => (
                     <>
                         <li key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 rounded-md cursor-pointer p-2 hover:bg-sky-100 hover:bg-opacity-25 transition ease-in mt-4

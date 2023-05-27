@@ -4,7 +4,7 @@ import { BsSearch, BsArrowLeft  } from "react-icons/bs";
 
 
 
-function Employees({isCEO, employeeDept, empId}){
+function Employees({isCEO, employeeDept, empl, onChange}){
 
     const [employeeDetails, setEmployeeDetails] = useState([]);
     const [deptEmployeeDetails, setDeptEmployeeDetails] = useState([]);
@@ -14,7 +14,7 @@ function Employees({isCEO, employeeDept, empId}){
     const [searchedEmp, setSearchedEmp] = useState(null);
     const [query, setQuery] = useState(null);
 
-    console.log(empId);
+    const [employee] = useState(empl);
 
 
     const processEmployeeDetails = async() =>{
@@ -154,10 +154,7 @@ function Employees({isCEO, employeeDept, empId}){
                             <BsArrowLeft className='my-1 mx-3 font-semibold '/>
                             Back
                     </button>
-                    <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900 ${empId === searchedEmp.empID ? "hidden" : ""}`}>
-                        {console.log(empId === searchedEmp.empID ? "hidden" : ".")}
-                        {console.log("here" + empId)}
-                        {console.log(searchedEmp?.empID)}
+                    {employee.empID !== searchedEmp.empID && <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900`}>
                         <table className='text-xl text-white px-4 my-4 rounded-xl bg-blue-500 w-full border-separate border-spacing-4'>
                             <tr className=''>
                                 <td className='rounded-md p-2 text-left border-2 border-white'>Employee ID :</td>
@@ -184,6 +181,19 @@ function Employees({isCEO, employeeDept, empId}){
                             Remove
                         </button>
                     </div>
+                    }
+                    {
+                       employee.empID === searchedEmp.empID &&
+                       <div className='text-center my-10 border-2 border-blue-800 rounded-2xl pt-20 px-6'>
+                        <h1 className='text-5xl text-center font-bold'>Looking for yourself! </h1>
+                        <h1 className='text-5xl text-center font-bold'>visit your Profile </h1>
+                        <button className="text-white rounded-xl px-20 py-2 my-20 bg-blue-900 hover:shadow-[0_0px_30px_5px_rgba(255,255,255,0.8)] hover:translate-x-0.5 hover:translate-y-0.5"
+                            onClick={() => onChange(0)}
+                        >
+                            Profile
+                        </button>
+                </div>   
+                    }
                 </> 
             }
             {singleShow && !searchedEmp &&
@@ -202,7 +212,8 @@ function Employees({isCEO, employeeDept, empId}){
                 <div>
                     
                     {deptEmployeeDetails.map((emp, index) => (
-                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900 ${empId === emp.empID ? "hidden" : ""}`}>
+                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900 ${employee.empID === emp.empID ? "hidden" : ""}`}>
+                            {console.log(emp.empID === employee.empID)}
                             <table className='text-xl text-white px-4 my-4 rounded-xl bg-blue-500 w-full border-separate border-spacing-4'>
                                 <tr className=''>
                                     <td className='rounded-md p-2 text-left border-2 border-white'>Employee ID :</td>
@@ -242,7 +253,7 @@ function Employees({isCEO, employeeDept, empId}){
             {!singleShow && isCEO && employeeDetails.length > 0 &&
                 <div className='w-full'>
                     <div className='mt-8'>
-                        <button className={`${deptShow === -1 ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 mt-4 transition ease-out delay-75 duration-600`} 
+                        <button className={`${deptShow === -1 ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,100,255,0.8)] text-white scale-110" : "bg-blue-500"} w-36 px-6 py-3 text-blue-300 rounded-full  mr-6 mt-4 `} 
                         onClick={ () => {
                             setDeptShow(-1);
                             processEmployeeDetails();
@@ -250,7 +261,7 @@ function Employees({isCEO, employeeDept, empId}){
                             Everyone
                         </button>
                         {deptArray.map((entry , idx)=>(
-                            <button className={`${deptShow === idx? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 transition ease-out delay-75 duration-600`} 
+                            <button className={`${deptShow === idx? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,100,255,0.8)] text-white scale-110" : "bg-blue-500"} w-36 px-6 py-3 text-blue-300 rounded-full mr-6 `} 
                             onClick={ () => {
                                 setDeptShow(idx);
                                 processDeptEmployees(entry);
@@ -261,7 +272,7 @@ function Employees({isCEO, employeeDept, empId}){
                     </div> 
                     
                     {deptShow === -1 && employeeDetails.map((emp, index) => (
-                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900  ${empId === emp.empID ? "hidden" : ""}`}>
+                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900  ${employee.empID === emp.empID ? "hidden" : ""}`}>
                             <table className='text-xl text-white px-4 my-4 rounded-xl bg-blue-500 w-full border-separate border-spacing-4'>
                                 <tr className=''>
                                     <td className='rounded-md p-2 text-left border-2 border-white'>Employee ID :</td>
@@ -290,7 +301,7 @@ function Employees({isCEO, employeeDept, empId}){
                         </div>
                     ))}
                     {deptShow > -1 && deptEmployeeDetails.map((emp, index) => (
-                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900  ${empId === emp.empID ? "hidden" : ""}`}>
+                        <div className={`my-12 rounded-3xl pt-2 pb-6 px-6 text-center bg-blue-900  ${employee.empID === emp.empID ? "hidden" : ""}`}>
                             <table className='text-xl text-white px-4 my-4 rounded-xl bg-blue-500 w-full border-separate border-spacing-4'>
                                 <tr className=''>
                                     <td className='rounded-md p-2 text-left border-2 border-white'>Employee ID :</td>

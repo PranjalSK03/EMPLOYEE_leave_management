@@ -26,6 +26,7 @@ app.set("view engine", "ejs");
 var Position = ["Technical Staff", "HR Staff", "Asst. Head Technical", "Head Technical", "Asst. Head HR", "Head HR", "CEO"];
 var Department = ["Technical", "HR", "CEO"];
 
+const dailyChange = require("../pre.js");
 
 //GET
 router.get("/", authenticateToken, async(req, res)=>{
@@ -33,8 +34,7 @@ router.get("/", authenticateToken, async(req, res)=>{
         const application = await Application.find({employeeId: req.user.id, applicationStatus: "Pending"})
         const applicationCount = application.length;
         var isCeo = false;
-        // console.log(application.length)
-        // console.log(application)
+
         let employee = await Employee.findOne({empID:req.user.id})
 
         let options = -1;
@@ -175,6 +175,8 @@ router.get("/judgeapplication", authenticateToken, async (req, res)=>{
 
 router.get("/onleave", authenticateToken, async (req, res)=>{
     //console.log(req.user);
+    dailyChange.OnLeaveEntries();
+    dailyChange.NewYearDelete();
 
     try{
         const employee = await Employee.findOne({empID: req.user.id});
@@ -333,6 +335,9 @@ router.get("/deptallemployee/:dept", authenticateToken, async (req, res)=>{
 
 router.get("/ceoprofile", authenticateToken, async (req, res)=>{
 
+    dailyChange.OnLeaveEntries();
+    dailyChange.NewYearDelete();
+
     try{
         const Employees = await Employee.find({})
         const Onleave = await OnLeave.distinct('empID');
@@ -372,7 +377,51 @@ router.post("/applyforleave", authenticateToken, async (req, res)=>{
     // locationOfAppl: timestampApplication: are decided here
     console.log(req.user);
 
-    const {appHeader, startDate, endDate, appBody} = req.body
+    const {appHeader, startDate, endDate, appBody} = req.body;
+    
+    const sDate = new Date(startDate);
+    console.log(sDate);
+    const eDate = new Date(endDate)
+
+    const todayDate = new Date();
+
+    var isApplThere = false;
+
+    if(sDate.getFullYear() < todayDate.getFullYear() || sDate.getMonth() < todayDate.getMonth() || sDate.getDate() < todayDate.getDate())
+    {
+        return res.status(200).send({
+            success: false,
+            msg: "leave starting date is a past date, choose a future or current date",
+            todayDate,
+            isApplThere
+        })
+    }
+    if(eDate.getFullYear() < todayDate.getFullYear() || eDate.getMonth() < todayDate.getMonth() || eDate.getDate() < todayDate.getDate())
+    {
+        return res.status(200).send({
+            success: false,
+            msg: "leave ending date is a past date, choose a future or current date",
+            todayDate,
+            isApplThere
+        })
+    }
+
+    const alreadyThereAppl = await Application.find({employeeId : req.user.id});
+    for(let i=0; i<alreadyThereAppl.length ;i++){
+        if(alreadyThereAppl[i].leaveStarts <= sDate && alreadyThereAppl[i].leaveEnds >= sDate){
+            console.log("already: " ,alreadyThereAppl[i]);
+            const alreadyThere = alreadyThereAppl[i];
+            isApplThere = true;
+            return res.status(200).send({
+                success: false,
+                msg: "you already have a leave application for that day",
+                alreadyThere,
+                isApplThere
+                
+            })
+        }
+    }
+    
 
     try{
         const employee =  await Employee.findOne({empID: req.user.id});
@@ -531,7 +580,7 @@ router.post("/judgeapplication", authenticateToken, async (req, res)=>{
                 let paidHoliday = entry.noOfLeaves;
                 let totalLeaves = entry.leavesTaken;
 
-                const noOfDays = (application.leaveEnds - application.leaveStarts)/86400000;
+                const noOfDays = ((application.leaveEnds - application.leaveStarts)/86400000) + 1;
 
                 totalLeaves += noOfDays;
                 if(noOfDays <= paidHoliday){

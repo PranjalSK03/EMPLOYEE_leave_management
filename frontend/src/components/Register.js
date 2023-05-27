@@ -66,7 +66,6 @@ function Register(){
 
             if(response.data.success === true){
                 console.log({response});
-                console.log("yes");
                 setError(null);
                 navigate('/login')
             }

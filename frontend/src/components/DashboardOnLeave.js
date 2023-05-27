@@ -67,8 +67,16 @@ function OnLeave(){
                                 <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en-IN")}</h1>
                                 <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en-IN")}</h1>  
                             </div>
-                            <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
-                            <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Department: {people.department}</h1>
+                            <div className={`${idx !== index && "hidden"} m-2`}>
+                                <div className='flex'>
+                                    <h1 className='text-white border-2 rounded-lg m-3 p-3 w-1/3 text-center mx-auto'>Designation: </h1>
+                                    <h1 className={`m-3 rounded-2xl bg-white px-6 py-3 w-1/2 font-semibold`}>{people.designation}</h1>
+                                </div>
+                                <div className='flex'>
+                                    <h1 className='text-white border-2 rounded-lg m-3 p-3 w-1/3 text-center mx-auto'>Department: </h1>
+                                    <h1 className={`m-3 rounded-2xl bg-white px-6 py-3 w-1/2 font-semibold`}>{people.department}</h1>
+                                </div>
+                            </div>
                         </div>}
                 </div>
                 
@@ -96,7 +104,10 @@ function OnLeave(){
                             <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en-IN")}</h1>
                             <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en-IN")}</h1>  
                         </div>
-                        <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
+                        <div className={`flex ${idx !== index && "hidden"}`}>
+                            <h1 className='text-white border-2 rounded-lg m-3 p-3 w-1/3 text-center mx-auto'>Designation: </h1>
+                            <h1 className={`m-3 rounded-2xl bg-white px-6 py-3 w-1/2 font-semibold`}>{people.designation}</h1>
+                        </div>
                     </div>}
                 </div>
                 
@@ -124,7 +135,10 @@ function OnLeave(){
                             <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en-IN")}</h1>
                             <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en-IN")}</h1>  
                         </div>
-                        <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
+                        <div className={`flex ${idx !== index && "hidden"}`}>
+                            <h1 className='text-white border-2 rounded-lg m-3 p-3 w-1/3 text-center mx-auto'>Designation: </h1>
+                            <h1 className={`m-3 rounded-2xl bg-white px-6 py-3 w-1/2 font-semibold`}>{people.designation}</h1>
+                        </div>
                     </div>}
                 </div>
             ))}
@@ -146,7 +160,10 @@ function OnLeave(){
                             <h1 className='text-2xl mt-2 mr-3'>From:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.starts).toLocaleDateString("en-IN")}</h1>
                             <h1 className='text-2xl mt-2 ml-12 mr-3'>To:</h1><h1 className='rounded-2xl bg-white text-black px-6 py-3 font-bold'>{new Date(people.ends).toLocaleDateString("en-IN")}</h1>  
                         </div>
-                        <h1 className={`m-3 rounded-2xl bg-white p-3 ${idx !== index && "hidden"}`}>Designation: {people.designation}</h1>
+                        <div className={`flex ${idx !== index && "hidden"}`}>
+                            <h1 className='text-white border-2 rounded-lg m-3 p-3 w-1/3 text-center mx-auto'>Designation: </h1>
+                            <h1 className={`m-3 rounded-2xl bg-white px-6 py-3 w-1/2 font-semibold`}>{people.designation}</h1>
+                        </div>
                     </div>}
                 </div>
             ))}

@@ -10,12 +10,6 @@ mongoose.connect(process.env.DB_LINK)
 .then(()=>{console.log("connected to DB")})
 .catch((err)=>{console.log("error ecountered \n" + err);});
 
-const Application = require("./models/application_model.js");
-const Employee = require("./models/employee_model.js");
-const OnLeave = require("./models/onleave_model.js");
-const Department = require("./models/department_model.js");
-const Designation = require("./models/designation_model.js");
-
 
 const app = express();
 

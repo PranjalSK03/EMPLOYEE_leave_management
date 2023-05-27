@@ -88,13 +88,23 @@ router.post("/register", authenticatedRedirect, async (req, res)=>{
     try{
 
         const {empId, name, department, designation, password} = req.body;
+
+        if(!((department == "Technincal" && (designation == "Technical Staff" || designation == "Asst. Head Technical" || designation == "Head Technical"))
+           ||(department == "HR" && (designation == "HR Staff" || designation == "Asst. Head HR" || designation == "Head HR"))
+           ||(department == "CEO" && (designation == "CEO")) 
+        )){  
+            return res.status(200).send({
+                success: false,
+                msg:"department and designation don't match"
+            })
+        }
         const isEmployeeThere = await Employee.findOne({empID: empId});
         console.log(isEmployeeThere);
         if(isEmployeeThere){
             if(isEmployeeThere.empID == empId){
                 return res.status(400).send({
                     success: false,
-                    msg:'ID already exists',
+                    msg:'ID already exists'
                 })
             }
         }

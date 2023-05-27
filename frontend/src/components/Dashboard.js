@@ -28,7 +28,6 @@ function Dashboard(){
     const [length, setLength] = useState(0);
     const [isCEO, setIsCEO] = useState(false);
     const [employeeDept, setEmployeeDept] = useState(null);
-    const [empId, setEmpId] = useState(null);
 
     const getProfile = async() => {
         try{
@@ -36,14 +35,12 @@ function Dashboard(){
             console.log({response})
             if(response.data.success) {
                 setEmployeeDept(response.data.employee.empDept);
-                setEmpId(response.data.employee.empID);
                 setEmployee(response.data.employee)
                 setCount(response.data.applicationCount)
                 setOption(response.data.options);
                 setLength(response.data.lenAppToVerify);
                 setIsCEO(response.data.isCeo);
                 
-                console.log(empId);
             }
             
         }
@@ -70,10 +67,10 @@ function Dashboard(){
             {select === 2  && !isCEO && (<Status selected={select} onChange={setSelected}/>)}
             {select === 2  && isCEO && (<OnLeave/>)}
             {select === 3  && !isCEO && (<PreviousLeaves selected={select} onChange={setSelected}/>)}{/*Previous Leaves needs to be mentioned here*/}
-            {select === 3  && isCEO && (<Employees isCEO = {isCEO} employeeDept = {employeeDept}/>)}{/*Previous Leaves needs to be mentioned here*/}
+            {select === 3  && isCEO && (<Employees isCEO = {isCEO} employeeDept = {employeeDept} empl = {employee} onChange={setSelected}/>)}{/*Previous Leaves needs to be mentioned here*/}
             {select === 4  && (<ViewApplication />)}
             {select === 5  && (<OnLeave/>)}
-            {select === 6  && (<Employees isCEO = {isCEO} employeeDept = {employeeDept} empId = {empId}/>)}
+            {select === 6  && (<Employees isCEO = {isCEO} employeeDept = {employeeDept} empl = {employee} onChange={setSelected}/>)}
             
             
         </div>
