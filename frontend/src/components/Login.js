@@ -13,6 +13,30 @@ function Login(){
       const [password , setPassword] = useState('')
       const [message , setMessage] = useState(null)
 
+      useEffect(() => {
+          document.body.classList.add('bg-blue-400');
+        }, []);
+    
+        const getUserInfo = async() => {
+            try{
+            const response = await axios.get('/user', { withCredentials:true})
+            console.log('response from backend' , response.data);
+            if(response?.data.employee)
+                navigate('/');
+            else
+                return;
+            }
+            catch(err) {
+                return;
+            }
+            
+
+        }
+
+        useEffect(() => {
+            getUserInfo() 
+        } , [])
+
       //function to process login data 
       const processLogin = async (e) => {
 		e.preventDefault() 

@@ -7,7 +7,7 @@ function PrevLeave({selected, onChange}){
 
     const getProfile = async() => {
         try{
-            const response = await axios.get('/user/previousLeaves',{withCredentials:true})
+            const response = await axios.get('/user/previousLeaveApplication',{withCredentials:true})
             console.log({response})
             if(response.data.success) {
                 setAccepted(response.data.accArray)
@@ -25,27 +25,29 @@ function PrevLeave({selected, onChange}){
     },[])
 
     return (
-    <div className={`${accepted.length === 0 ? "mx-auto my-8" : "mx-6 my-8"}`}>
+    <div className={`mx-auto ${accepted.length === 0 ? "my-8" : "my-8"}`}>
             {accepted.length > 0 && accepted.map((application, index) => (
-                <div className="rouned-2xl bg-blue-800 ">
-                    <h1 className='bg-blue-300 p-3 mb-3 rounded-lg text-black font-bold text-xl  shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]'>{application._id}</h1>
+                <div className="rounded-2xl bg-blue-800 p-6 my-20">
+                    <h1 className='bg-blue-300 p-3 mb-6 rounded-lg text-black font-bold text-xl  shadow-[0_1px_10px_2px_rgba(255,255,255,0.5)] text-center'>{application._id}</h1>
                     <div className='flex gap-7 rounded-xl bg-blue-500 p-5'>
-                        <h1 className='text-white text-2xl text-center'>From:</h1>
+                        <h1 className='text-white text-2xl text-center my-auto'>From:</h1>
                         <h1 className='bg-blue-300 rounded-xl px-2 py-3.5 font-bold text-xl text-center'>{new Date(application.leaveStarts).toLocaleDateString("en-IN")}</h1>
                     </div>
-                    <div className="flex gap-7 my-6  rounded-xl bg-blue-500 p-5">
-                        <h1 className='text-white text-2xl text-center'>To:</h1>
+                    <div className="flex gap-14 mt-1 mb-4 rounded-xl bg-blue-500 p-5">
+                        <h1 className='text-white text-2xl text-center my-auto'>To:</h1>
                         <h1 className='bg-blue-300 rounded-xl px-2 py-3.5 font-bold text-xl text-center'>{new Date(application.leaveEnds).toLocaleDateString("en-IN")}</h1>  
                     </div>
 
+                    <hr className='my-6'/>
+
                     <table className='border-separate border-spacing-3 mb-4'>
                             <tr>
-                                <td>Reason:</td>
-                                <td className='bg-blue-400 rounded-xl px-6 py-2 text-white font-semibold'>{application?.applicationHeader}</td>
+                                <td className='text-white underline'>Reason:</td>
+                                <td className='bg-blue-400 rounded-xl px-6 py-2 text-white font-semibold w-full'>{application?.applicationHeader}</td>
                             </tr>
                             <tr>
-                                <td>Application:</td>
-                                <td className='bg-blue-400 rounded-xl px-6 py-2 text-white font-semibold'>{application?.applicationBody}</td>
+                                <td className='text-white underline'>Application:</td>
+                                <td className='bg-blue-400 rounded-xl px-6 py-2 text-white font-semibold w-full'>{application?.applicationBody}</td>
                             </tr>
                     </table>
                 </div> 

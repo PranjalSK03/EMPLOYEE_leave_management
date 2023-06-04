@@ -10,8 +10,6 @@ const Employee = require("../models/employee_model.js");
 const Flow = require("../models/flow_model.js");
 const OnLeave = require("../models/onleave_model.js");
 const Credentials = require("../models/employee_cred_model.js");
-const Designation = require("../models/designation_model.js");
-const Departments = require("../models/department_model.js");
 
 
 const app = express();
@@ -35,7 +33,7 @@ router.get("/", authenticateToken, async(req, res)=>{
         const applicationCount = application.length;
         var isCeo = false;
 
-        let employee = await Employee.findOne({empID:req.user.id})
+        let employee = await Employee.findOne({empID: req.user.id})
 
         let options = -1;
         if(employee.designation == "Asst. Head HR" || employee.designation == "Asst. Head Technical" || employee.designation == "HR Staff")
@@ -54,7 +52,7 @@ router.get("/", authenticateToken, async(req, res)=>{
         }
 
         if(!employee) return res.status(400).send({
-            success:false ,
+            success: false,
             msg:'There was an error! Please try again later.'
         })
 
@@ -247,20 +245,24 @@ router.get("/onleave", authenticateToken, async (req, res)=>{
 
 })
 
-router.get("/previouLeavesApplication", authenticateToken, async (req,res)=>{
+router.get("/previousLeaveApplication", authenticateToken, async (req,res)=>{
 
     try{
-        const accApplications = await Application.find({appID : req.user.id, applicationStatus : "Accepted"});
+        console.log("here")
+        console.log(req.user.id)
+        const accApplications = await Application.find({employeeId : req.user.id, applicationStatus : "Accepted"});
+
+        //console.log(accApplications);
 
         function requiredApplication(x){
 
-            let arr = [];
+            var arr = [];
 
             for(let i=0; i<x.length; i++) {
                 const eDate = x[i].leaveEnds;
                 const todayDate = new Date();
 
-                if(eDate.getFullYear() <= todayDate.getFullYear() && eDate.getMonth() <= todayDate.getMonth() && eDate.getDate() < todayDate.getDate()){
+                if(eDate.getFullYear() < todayDate.getFullYear() ||(eDate.getFullYear() == todayDate.getFullYear() && eDate.getMonth() < todayDate.getMonth()) ||(eDate.getFullYear() == todayDate.getFullYear() && eDate.getMonth() == todayDate.getMonth() && eDate.getDate() < todayDate.getDate())){
                     arr.push(x[i]);
                 }  
             }
@@ -380,10 +382,9 @@ router.post("/applyforleave", authenticateToken, async (req, res)=>{
     const {appHeader, startDate, endDate, appBody} = req.body;
     
     const sDate = new Date(startDate);
-    console.log(sDate);
-    const eDate = new Date(endDate)
+    const eDate = new Date(endDate);
 
-    const todayDate = new Date();
+    var todayDate = new Date();
 
     var isApplThere = false;
 
@@ -401,6 +402,17 @@ router.post("/applyforleave", authenticateToken, async (req, res)=>{
         return res.status(200).send({
             success: false,
             msg: "leave ending date is a past date, choose a future or current date",
+            todayDate,
+            isApplThere
+        })
+    }
+
+    if(sDate.getFullYear() > eDate.getFullYear() || sDate.getMonth() > eDate.getMonth() || sDate.getDate() > eDate.getDate())
+    {
+        todayDate = null;
+        return res.status(200).send({
+            success: false,
+            msg: "your leave ending date must be ahead or same day as leave starting day",
             todayDate,
             isApplThere
         })
@@ -595,7 +607,7 @@ router.post("/judgeapplication", authenticateToken, async (req, res)=>{
                 console.log("totalLeaves updated: ", totalLeaves);
 
                 const output = await Employee.updateOne({empID: application.employeeId}, {$set:{noOfLeaves: paidHoliday, leavesTaken: totalLeaves}})
-                consoele.log(output);
+                // consoele.log(output);
 
                 return res.status(200)
                 .send({
@@ -626,12 +638,13 @@ router.post("/judgeapplication", authenticateToken, async (req, res)=>{
                 }
             }
             const result = await Application.updateOne(filter, update);
+            // console.log(result);
 
-            if(result.modifiedCount > 1){
+            if(result.modifiedCount >= 1){
                 return res.status(200)
                 .send({
                     success: true,
-                    msg: "you rejected the message"
+                    msg: "you rejected the application"
                 })
             }
             else{
@@ -677,9 +690,10 @@ router.post("/requiredapplication", authenticateToken, async (req, res)=>{
         
     }
     catch(err){
+        console.log(err);
         return res.status(500).send({
             success: false,
-            msg: "server error !!"
+            msg: "server error !!",
         })
     }
     

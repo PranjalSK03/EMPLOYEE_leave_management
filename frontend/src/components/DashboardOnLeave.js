@@ -44,8 +44,10 @@ function OnLeave(){
         <div className="mx-8 my-8 inline-block w-1/2">
             {choice === 2 &&
                 <div className=''>
+                    <hr className='mb-4'/>
                     <button className={`${!deptShow ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 transition ease-out delay-75 duration-600`} onClick={ () => setDeptShow(!deptShow)}>Everyone</button>
-                    <button className={`${deptShow ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4 mb-8 transition ease-out delay-75 duration-600`} onClick={ () => setDeptShow(!deptShow)}>Department</button>
+                    <button className={`${deptShow ? "bg-blue-900 shadow-[0_1px_15px_5px_rgba(0,0,80,0.5)]" : "bg-blue-500"} px-6 py-3 rounded-full text-white mr-4  transition ease-out delay-75 duration-600`} onClick={ () => setDeptShow(!deptShow)}>Department</button>
+                    <hr className='mb-8 mt-4'/>
                 </div> 
            }
             {choice === 2 && !deptShow && leaveData.map((people, index)=>(
@@ -142,6 +144,11 @@ function OnLeave(){
                     </div>}
                 </div>
             ))}
+            {choice === 1 && deptLeaveData.length === 0 &&
+                <div className='my-10 rounded-2xl border-2 border-blue-800 py-12 px-8 text-center mx-auto'>
+                    <h1 className='text-5xl font-bold'>Looks like no ones on leave</h1>
+                </div>
+            }
             {choice === 3 && leaveData.map((people, index)=>(
                 <div>
                     {isEmpty && <h1 className='text-5xl font-bold px-60 py-10  border-2 border-blue-800 p-10 rounded-2xl'>Looks like No Ones On Leave !!</h1>}
@@ -167,6 +174,11 @@ function OnLeave(){
                     </div>}
                 </div>
             ))}
+            {choice === 3 && leaveData.length === 0 &&
+                <div className='my-10 rounded-2xl border-2 border-blue-800 py-12 px-8 text-center mx-auto'>
+                    <h1 className='text-5xl font-bold'>Looks like no ones on leave</h1>
+                </div>
+            }
         </div>
     );
 }

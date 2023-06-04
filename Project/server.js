@@ -39,9 +39,6 @@ app.get("/", (req, res)=>{
 //home router
 const homeRouter = require('./routes/home');
 app.use("/home", homeRouter);
-//admin router
-const adminRouter = require('./routes/admin');
-app.use("/admin", adminRouter);
 //user router
 const userRouter = require('./routes/user');
 app.use("/user", userRouter);

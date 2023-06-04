@@ -8,11 +8,15 @@ function Apply(){
     const [application , setApplication] = useState({
         appHeader:'', startDate:'', endDate:'', appBody:''
     })
+
+    let today = new Date();
     
     const [error, setError] = useState(null);
     const [date, setDate] = useState(null);
     const [isAppl, setIsAppl] = useState(false);
     const [alreadyAppl, setAlreadyAppl] = useState(null);
+    const [tDate] = useState(today.getFullYear() + "-" + (today.getMonth() <= 9 ? ("0" + (today.getMonth()+1)) : (today.getMonth()+1))+ "-" + (today.getDate() <= 9 ? ("0"+(today.getDate())) : today.getDate()));
+    console.log(tDate);
 
     let handleInputChange = (e) =>{
         const name = e.target.name , value = e.target.value 
@@ -21,8 +25,7 @@ function Apply(){
     }
 
     const resetForm = (e) => {
-        const name = e.target.name; 
-        setApplication({...application , [name]:''})
+        e.target.value = null;
     }
 
     const processApply = async(e) => {
@@ -60,7 +63,6 @@ function Apply(){
 
         }
     }
-
     
 
     return(
@@ -83,7 +85,7 @@ function Apply(){
                             setError(null);
                             handleInputChange(e)
                         }}
-                        name="startDate" type="Date"
+                        name="startDate" type="Date" min={tDate}
                         className="rounded-lg my-2 px-3 py-2 text-black border-2 border-gray-300 focus:border-blue-600 focus:outline-none focus:shadow-[0_1px_20px_0px_rgba(0,0,90,0.5)]" required/>
                     </div>
                     <div>
@@ -92,7 +94,7 @@ function Apply(){
                             setError(null);
                             handleInputChange(e)
                         }}
-                        name="endDate" type="Date" 
+                        name="endDate" type="Date" min={tDate}
                         className="rounded-lg my-2 px-3 py-2 text-black border-2 border-gray-300 focus:border-blue-600 focus:outline-none focus:shadow-[0_1px_20px_0px_rgba(0,0,90,0.5)]" required/>
                     </div>
                     <div>
@@ -115,7 +117,7 @@ function Apply(){
             </div>
             {error && 
             <div className='my-auto w-1/3 flex '>
-                <BiLeftArrow className='my-auto text-6xl text-red-600 animate-bounce'/>
+                <BiLeftArrow className='my-auto text-8xl text-red-600 animate-bounce'/>
                 <div className='rounded-2xl bg-red-600 px-2 pb-6 pt-2 mr-6 shadow-[0_0px_15px_2px_rgba(0,0,0,0.3)]'>
                     <IoCloseCircleOutline className='ml-auto text-2xl text-white hover:scale-125 cursor-pointer' onClick={() => setError(null)}/>
                     <h1 className='text-center text-3xl font-bold text-white pb-3 flex justify-center  mx-3'>ERROR<CgDanger className='pt-2'/></h1>

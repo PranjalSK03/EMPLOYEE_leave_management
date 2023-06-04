@@ -17,9 +17,9 @@ function Dashboard(){
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        document.body.classList.add('bg-blue-300');
-    }, []);
+    // useEffect(() => {
+    //     document.body.classList.add('bg-blue-300');
+    // }, []);
 
     const [employee , setEmployee] = useState(null)
     const [count , setCount] = useState(0);
@@ -40,7 +40,7 @@ function Dashboard(){
                 setOption(response.data.options);
                 setLength(response.data.lenAppToVerify);
                 setIsCEO(response.data.isCeo);
-                
+                // window.location.reload();
             }
             
         }
@@ -59,7 +59,7 @@ function Dashboard(){
     
 
     return(
-        <div className='flex'>
+        <div className='flex bg-blue-300'>
            <Sidebar selected={select} onChange={setSelected} option={option} length = {length}/>
             {select === 0  && employee  && (<Profile employee = {employee} count={count} isCEO = {isCEO}/>)}
             {select === 1  && !isCEO && (<Apply />)}

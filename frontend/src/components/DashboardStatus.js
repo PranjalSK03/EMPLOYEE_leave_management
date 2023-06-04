@@ -29,22 +29,30 @@ function Status({select, onChange}){
 
     const processSingle = async(e) =>{
         e.preventDefault();
-        const response = await axios.post("/user/requiredapplication",{
-            query
-        }, { withCredentials:true });
 
-        console.log({response});
-
-        if(response.data.success){
-            setSingleShow(true);
-            console.log(response.data.application);
-            setSingleApplication(response.data.application);
-            console.log(singleApplication);
+        try{
+            const response = await axios.post("/user/requiredapplication",{
+                query
+            }, { withCredentials:true });
+    
+            console.log({response});
+    
+            if(response.data.success){
+                setSingleShow(true);
+                console.log(response.data.application);
+                setSingleApplication(response.data.application);
+                console.log(singleApplication);
+            }
+            else{
+                setSingleShow(true);
+                console.log(response.data.msg) 
+            }
         }
-        else{
+        catch(err){
+            console.log(err);
             setSingleShow(true);
-            console.log(response.data.msg) 
         }
+        
     }
 
     useEffect(() => {

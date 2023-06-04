@@ -97,7 +97,7 @@ function ViewApp(){
                                 </tr>
                             </table>
                             <div className=''>
-                                <h1 className='text-center w-2/3 bg-blue-600 py-3 rounded-full mx-auto mt-6 mb-3'>Track your Application: </h1>
+                                <h1 className='text-center w-2/3 bg-blue-600 py-3 rounded-full mx-auto mt-6 mb-3'>Application History: </h1>
                                 {application.timestampForward?.map((timeStamp , idx) => (
                                     <div className='flex gap-6 mx-20 my-2'>
                                         <h1>{new Date(timeStamp).toLocaleString("en-IN")}</h1>

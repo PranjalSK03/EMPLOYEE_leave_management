@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const flowSchema = new mongoose.Schema({
     flow_ID:{
         type: Number,
-        requrired: [true, "enter the flow ID"]
+        required: [true, "enter the flow ID"]
     },
     flow_index:[{type: Number}]
 });

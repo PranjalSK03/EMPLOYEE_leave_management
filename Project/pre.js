@@ -26,7 +26,7 @@ async function OnLeaveEntries(){
         // console.log(sDate.getFullYear() == todayDate.getFullYear() && sDate.getMonth() == todayDate.getMonth() && sDate.getDate() == todayDate.getDate());
         // console.log("\n")
 
-        if(eDate.getFullYear() <= todayDate.getFullYear() && eDate.getMonth() <= todayDate.getMonth() && eDate.getDate() < todayDate.getDate()){
+        if(eDate.getFullYear() >= todayDate.getFullYear() || eDate.getMonth() >= todayDate.getMonth() || eDate.getDate() > todayDate.getDate()){
             console.log(application[i]._id)
             const result = await OnLeave.deleteOne({applID: application[i]._id});
             console.log(result);

@@ -32,11 +32,7 @@ const employeeSchema = new mongoose.Schema({
     applications:[{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Application'
-    }],
-    isAdmin:{
-        type: Boolean,
-        default: true
-    }
+    }]
 });
 
 const Employee = new mongoose.model('Employee', employeeSchema);

@@ -8,8 +8,6 @@ const jwt = require('jsonwebtoken');
 
 const Employee = require("../models/employee_model.js");
 const Credentials = require("../models/employee_cred_model.js");
-const Designation = require("../models/designation_model.js");
-const Department = require("../models/department_model.js");
 
 const app = express();
 const router = express.Router();
