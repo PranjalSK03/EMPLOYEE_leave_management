@@ -41,7 +41,7 @@ function OnLeave(){
     },[])
 
     return(
-        <div className="mx-8 my-8 inline-block w-1/2">
+        <div className="mx-auto my-8 inline-block w-1/2">
             {choice === 2 &&
                 <div className=''>
                     <hr className='mb-4'/>
@@ -146,7 +146,7 @@ function OnLeave(){
             ))}
             {choice === 1 && deptLeaveData.length === 0 &&
                 <div className='my-10 rounded-2xl border-2 border-blue-800 py-12 px-8 text-center mx-auto'>
-                    <h1 className='text-5xl font-bold'>Looks like no ones on leave</h1>
+                    <h1 className='text-5xl font-bold'>Looks like no one is on leave</h1>
                 </div>
             }
             {choice === 3 && leaveData.map((people, index)=>(

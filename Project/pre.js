@@ -15,9 +15,11 @@ async function OnLeaveEntries(){
     for(let i=0; i<application.length; i++) {
 
         const sDate = application[i].leaveStarts;
-        let date = application[i].leaveEnds;
-        date.setDate(date.getDate()+1)
-        const eDate = date;
+        const eDate = application[i].leaveEnds;
+
+        // console.log("start Date:", sDate);
+        // console.log("end Date:", eDate);
+        // console.log("today Date:", todayDate)
 
         // console.log(todayDate.getDate(), todayDate.getMonth(), todayDate.getFullYear());
         // console.log(sDate.getDate(), sDate.getMonth(), sDate.getFullYear());
@@ -26,18 +28,21 @@ async function OnLeaveEntries(){
         // console.log(sDate.getFullYear() == todayDate.getFullYear() && sDate.getMonth() == todayDate.getMonth() && sDate.getDate() == todayDate.getDate());
         // console.log("\n")
 
-        if(eDate.getFullYear() >= todayDate.getFullYear() || eDate.getMonth() >= todayDate.getMonth() || eDate.getDate() > todayDate.getDate()){
+        if(eDate.getFullYear() < todayDate.getFullYear() ||
+          ((eDate.getFullYear() == todayDate.getFullYear())&&(eDate.getMonth() < todayDate.getMonth())) ||
+          ((eDate.getFullYear() == todayDate.getFullYear())&&(eDate.getMonth() == todayDate.getMonth())&&(eDate.getDate() < todayDate.getDate()))){
             console.log(application[i]._id)
             const result = await OnLeave.deleteOne({applID: application[i]._id});
             console.log(result);
-            if(result.deletedCount >=1){
+            if(result.deletedCount >= 1){
                 console.log("deleted successfully"); 
             }
         }
 
-        if((sDate.getFullYear() == todayDate.getFullYear() && eDate.getFullYear() >= todayDate.getFullYear())
-        && (sDate.getMonth() == todayDate.getMonth() && eDate.getMonth() >= todayDate.getMonth())
-        && (sDate.getDate() == todayDate.getDate() && eDate.getDate() >= todayDate.getDate()))
+
+        if((sDate.getFullYear() <= todayDate.getFullYear() && eDate.getFullYear() >= todayDate.getFullYear())
+        && (sDate.getMonth() <= todayDate.getMonth() && eDate.getMonth() >= todayDate.getMonth())
+        && (sDate.getDate() <= todayDate.getDate() && eDate.getDate() >= todayDate.getDate()))
         {
             const employee = await Employee.findOne({empID: application[i].employeeId});
             const onLeave = await OnLeave.find({applID: application[i]._id})
