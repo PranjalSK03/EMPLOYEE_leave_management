@@ -59,7 +59,7 @@ Each user role has custom access and features:
 
 - Compatible with Chrome, Firefox, Edge, Safari
 - Runs on Windows, macOS, Linux
-- Requires internet connection
+- No internet connection required, Runs as localhost
 
 ## 📂 Setup Instructions
 
