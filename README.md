@@ -1,8 +1,8 @@
-# EMPLOYEE_leave_management
-
 # Aphelion: Leave Management System for Employees
 
 Aphelion is a modern, web-based Leave Management System designed to streamline and automate the leave application and approval process within organizations. Built using the MERN stack and enhanced with Tailwind CSS, it offers a secure, efficient, and user-friendly experience for both employees and administrators.
+
+![Aphelion Welcome](images/Home.jpg)
 
 ## 🚀 Features
 
@@ -35,31 +35,72 @@ Aphelion is a modern, web-based Leave Management System designed to streamline a
 - bcrypt
 - HTTPS
 
-## 🏗️ Architecture
+---
 
-Aphelion follows an MVC architecture:
-- **Model**: Mongoose-based schemas for employees, applications, flows, and on-leave data.
-- **View**: Built using React and Tailwind for responsive and intuitive UI.
-- **Controller**: Express.js handles business logic and routes.
+## 🏗️ Architecture Overview
 
-RESTful APIs enable efficient communication between the frontend and backend.
+### 🧠 Context Diagram
+This shows the interactions between the Leave Management System and different user roles:
+
+![Context Diagram](images/context%20diagram.jpg)
+
+### 🔄 Leave Approval Flow
+The leave approval path varies based on the user's role and department:
+
+![Flow Diagram](images/Flow_diagram.jpg)
+
+### 🏢 Organizational Hierarchy
+Visual breakdown of role distribution:
+
+![Organization Structure](images/Orgnaization%20structure.jpg)
+
+---
+
+## 💻 UI Previews
+
+### 🌟 Dashboard
+View a summary of leaves taken, pending applications, and user profile:
+
+![Dashboard](images/Technical%20%20Head%20dashboard.jpg)
+
+### 📝 Apply for Leave
+Simple, clean form to request a leave:
+
+![Apply Leave](images/HR%20head%20apply.jpg)
+
+### 📄 View Application Status
+Track leave status with timestamps and progress:
+
+![Status View](images/Tech%20Staff%20status.jpg)
+
+### 👥 Manage Department Employees
+Admins can monitor and manage staff records:
+
+![Department Employees](images/HR%20head%20dept_employees.jpg)
+
+---
 
 ## 📚 Modules & Roles
 
 Each user role has custom access and features:
 
-- **Technical Staff**: Apply for leave, view status, leave history.
-- **Assistant Technical Head**: Approve/reject leaves of staff, view department leave status.
-- **Head Technical**: Manage staff, applications, and reports.
-- **HR Staff**: Similar to technical roles but for HR department.
-- **Head HR & Assistant HR Head**: Full leave oversight, employee management.
-- **CEO**: Org-wide approval and employee oversight.
+| Role | Features |
+|------|----------|
+| **Technical Staff** | Apply for leave, view history/status |
+| **Assistant Head (Tech/HR)** | Approve/reject leaves within department |
+| **Head (Tech/HR)** | Department-wide leave management |
+| **HR Staff** | Apply & manage HR department leaves |
+| **CEO** | Org-wide access and final-level approvals |
+
+---
 
 ## 📦 System Requirements
 
 - Compatible with Chrome, Firefox, Edge, Safari
 - Runs on Windows, macOS, Linux
-- No internet connection required, Runs as localhost
+- No Requirement of internet connection, runs locally
+
+---
 
 ## 📂 Setup Instructions
 
@@ -74,15 +115,14 @@ npm install
 
 # Setup environment variables
 cp .env.example .env
-# Update .env with your MongoDB URI and JWT secret
+# Edit the .env with your MongoDB URI and JWT secret
 
 # Start backend
 npm start
 
-# In a new terminal, install frontend dependencies
+# Install frontend dependencies
 cd ../frontend
 npm install
 
 # Start frontend
 npm run dev
-
