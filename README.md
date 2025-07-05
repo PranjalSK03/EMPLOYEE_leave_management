@@ -58,7 +58,7 @@ Visual breakdown of role distribution:
 
 ## 💻 UI Previews
 
-### Register and Login Interface
+### 🔒 Register and Login Interface
 User Friendly Login and Register Page
 
 ![Register](images/Register.jpg)
