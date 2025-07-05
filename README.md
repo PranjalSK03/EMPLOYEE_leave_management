@@ -58,6 +58,13 @@ Visual breakdown of role distribution:
 
 ## 💻 UI Previews
 
+### Register and Login Interface
+User Friendly Login and Register Page
+
+![Register](images/Register.jpg)
+
+![Login](Login.jpg)
+
 ### 🌟 Dashboard
 View a summary of leaves taken, pending applications, and user profile:
 
